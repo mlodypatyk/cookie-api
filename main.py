@@ -105,7 +105,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.path == '/get_cookie_data':
             self.send_response(200)
             self.send_header('Access-Control-Allow-Origin', '*')
-            self.send_header('content-type', 'text/html')
+            self.send_header('content-type', 'application/json')
             self.end_headers()
             self.wfile.write(self.server.result.encode())
         else:
@@ -115,6 +115,7 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
 
 def run(server_class=Server, handler_class=Handler):
+    handler_class.server_version = "Server: nie wiem"
     httpd = server_class(server_adress, handler_class)
     httpd.serve_forever()
 
