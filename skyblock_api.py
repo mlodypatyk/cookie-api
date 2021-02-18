@@ -19,7 +19,10 @@ def update():
         print('Downloading page', page_num)
         page_n = requests.get(url + 'auctions', params = {'key': api_key, 'page': page_num})
         page_json = page_n.json()
-        auctions_list += page_json["auctions"]
+        if page_json["success"]:
+            auctions_list += page_json["auctions"]
+        else:
+            print('error')
     print('Finished updating')
     
     return bazaar, auctions_list
