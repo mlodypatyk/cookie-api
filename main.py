@@ -3,7 +3,7 @@ import threading
 from time import time
 import json
 
-from data import refresh_time
+from data import refresh_time, server_adress
 from skyblock_api import update
 from items import auction_items, enchanted_books
 
@@ -115,8 +115,7 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
 
 def run(server_class=Server, handler_class=Handler):
-    server_address = ('localhost', 8080)
-    httpd = server_class(server_address, handler_class)
+    httpd = server_class(server_adress, handler_class)
     httpd.serve_forever()
 
 if __name__ == '__main__':
